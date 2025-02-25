@@ -27,6 +27,7 @@ import './styles/index.css';
 
 // Lazy load route components for code splitting
 // Main feature pages
+const HomePage = lazy(() => import('./pages/HomePage'));
 const AuthPage = lazy(() => import('./pages/AuthPage'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const ApiTestPage = lazy(() => import('./pages/ApiTestPage'));
@@ -103,14 +104,10 @@ root.render(
                     <Route path="/cpp" element={<CppExamples />} />
                     <Route path="/rust" element={<RustExamples />} />
                     
-                    {/* Default route redirects to dashboard for authenticated users */}
+                    {/* Default route shows the home page */}
                     <Route 
                       path="/" 
-                      element={
-                        localStorage.getItem('auth_token') 
-                          ? <Navigate to="/dashboard" replace /> 
-                          : <Navigate to="/auth" replace />
-                      } 
+                      element={<HomePage />} 
                     />
                     
                     {/* 404 route */}
